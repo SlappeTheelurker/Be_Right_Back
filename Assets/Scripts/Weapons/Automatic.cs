@@ -7,8 +7,7 @@ public abstract class Automatic : Weapon
     {
 
     }
-
-    //Input
+    
     protected void Update()
     {
         if (Input.GetMouseButton(0))

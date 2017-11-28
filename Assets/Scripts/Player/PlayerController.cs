@@ -5,27 +5,21 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
-
     public Camera cam;
     public float baseMoveSpeed, dodgerollSpeed, dodgerollCooldownLength, dodgerollBreakSpeed, knockbackLength, knockbackBrake, diveKnockback;
     public int resourceAmount;
     public Text resourceAmountDisplay;
+    public bool dodgerolling, isDead;
+    public Animator pPAnimator;
+    public AudioSource source;
+    public AudioClip diveSound;
+    public Weapon weapon;
 
     private Rigidbody2D myRigidbody;
     private bool moveVelocityActive;
-
-    public bool dodgerolling, isDead;
     private float dodgerollCooldownCounter, knockbackCounter, collisionCounter, moveSpeed;
-
-    public Animator pPAnimator;
     private Animator animator;
-
-    public AudioSource source;
-    public AudioClip diveSound;
-
     private Vector2 moveInput, lastInput, moveVelocity, mousePosition;
-
-    public Weapon weapon;
 
     //if a player already exists, destroy self
     private void Awake()
@@ -196,7 +190,6 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("Diving", false);
             knockbackCounter = 5f;
         }
-
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -206,13 +199,15 @@ public class PlayerController : MonoBehaviour {
             collisionCounter = 0;
         }
 
+        //Diving against a rock
         if (other.gameObject.tag == "Rock" && other.gameObject.GetComponent<SpaceRockController>().wellPlaced
             && dodgerollCooldownCounter > 0 && collisionCounter <= 0)
         {
             other.gameObject.GetComponent<SpaceRockController>().GetDamaged();
 
-            GetKnockedTheFuckBack((transform.position - other.transform.position).normalized * diveKnockback);
+            GetKnockedBack((transform.position - other.transform.position).normalized * diveKnockback);
 
+            //get resources from rock
             int amountGotten = 0;
             if (other.gameObject.GetComponent<SpaceRockController>().health <= 0)
             {
@@ -221,8 +216,6 @@ public class PlayerController : MonoBehaviour {
             else
             {
                 amountGotten = other.gameObject.GetComponent<SpaceRockController>().GetDamageResource();
-
-                //Animate player portrait
                 pPAnimator.SetBool("GetItem", true);
             }
             resourceAmount += amountGotten;
@@ -239,7 +232,7 @@ public class PlayerController : MonoBehaviour {
         collisionCounter = 0;
     }
 
-    public void GetKnockedTheFuckBack(Vector2 knockback)
+    public void GetKnockedBack(Vector2 knockback)
     {
         myRigidbody.AddForce(knockback);
         knockbackCounter = knockbackLength;

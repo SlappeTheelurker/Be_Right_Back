@@ -5,19 +5,23 @@ using UnityEngine.UI;
 
 public class RandomWeaponController : MonoBehaviour
 {
-    private Dictionary<string, Weapon> weapons = new Dictionary<string, Weapon>();
+    private Dictionary<string, Weapon> weapons;
 
     private string currentWeapon, previousWeapon;
 
     private void Start()
     {
-        weapons.Add("PISTOL", GetComponent<Pistol>());
-        weapons.Add("RIFLE", GetComponent<Rifle>());
-        weapons.Add("SHOTGUN", GetComponent<Shotgun>());
+        weapons = new Dictionary<string, Weapon>
+        {
+            { "PISTOL", GetComponent<Pistol>() },
+            { "RIFLE", GetComponent<Rifle>() },
+            { "SHOTGUN", GetComponent<Shotgun>() }
+        };
 
         currentWeapon = "PISTOL";
     }
 
+    //For testing purposes
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))

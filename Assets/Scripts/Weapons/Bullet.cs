@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    public float speed, totalLifeTime;
+    public float speed, totalLifeTime, hitSoundLength;
     public AudioClip hit;
     private AudioSource source;
     private float lifeTime, dieCounter;
@@ -16,28 +16,27 @@ public class Bullet : MonoBehaviour {
         dying = false;
         source = gameObject.GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
-	}
-
-    // Update for physics shtuff
+    
     private void FixedUpdate()
     {
-        lifeTime++;
-        if (lifeTime >= totalLifeTime) Destroy(gameObject);
+        lifeTime += Time.deltaTime;
+        if (lifeTime >= totalLifeTime)
+        {
+            Destroy(gameObject);
+        }
 
         if (dying)
         {
             GetComponent<SpriteRenderer>().sprite = null;
             GetComponent<BoxCollider2D>().enabled = false;
-            dieCounter++;
-            if (dieCounter > 6)
+            dieCounter += Time.deltaTime;
+            if (dieCounter > hitSoundLength)
             {
                 Destroy(gameObject);
             }
         }
+
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)

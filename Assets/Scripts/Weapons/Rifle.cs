@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Rifle : Automatic
 {
-
     // Use this for initialization
     void Start()
     {

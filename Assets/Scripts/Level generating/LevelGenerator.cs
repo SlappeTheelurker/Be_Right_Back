@@ -6,13 +6,11 @@ public class LevelGenerator : MonoBehaviour {
     public int firstLevelRockAmount, rocksAddedPerLvl, rockAmountMax, rockResourceMin, rockResourceMinAdded, rockResourceMax, rockResourceMaxAdded;
     public GameObject enemySpawner1, enemySpawner2, enemySpawner3, enemySpawner4, rockPrefab;
     public float xMin, xMax, yMin, yMax;
+    public bool generating;
 
     private List<GameObject> enemySpawners = new List<GameObject>();
     private List<GameObject> rocks = new List<GameObject>();
-
     private int currentRockAmount;
-
-    public bool generating;
 
     public void Start()
     {
@@ -30,19 +28,13 @@ public class LevelGenerator : MonoBehaviour {
         if (generating)
         {
             Debug.Log("starting with new generation");
+
+            //Move around all the rocks to random places
             foreach (GameObject rock in rocks)
             {
-                //int infiniteLoopPrevention = 0;
                 if (rock.GetComponent<SpaceRockController>().collideWithRock || rock.GetComponent<SpaceRockController>().collideWithPlate)
                 {
                     rock.transform.position = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -3f);
-                    //infiniteLoopPrevention++;
-                    //if (infiniteLoopPrevention > 600000)
-                    //{
-                    //    Debug.Log("Fuck it, ABBANDON SHIP!!!");
-                    //    infiniteLoopPrevention = 0;
-                    //    break;
-                    //}
                 }
                 else
                 {
@@ -50,6 +42,7 @@ public class LevelGenerator : MonoBehaviour {
                 }
             }
 
+            //Count rocks that are NOT colliding with illegal collision
             int rocksWellPlaced = 0;
             foreach (GameObject rock in rocks)
             {
@@ -70,8 +63,6 @@ public class LevelGenerator : MonoBehaviour {
 
     public void NextLevel()
     {
-        GameObject.Find("Weapon").GetComponent<RandomWeaponController>().GiveRandomWeapon();
-
         //Add more rocks and resources per rocks to the level
         if (currentRockAmount < rockAmountMax)
         {
@@ -84,8 +75,10 @@ public class LevelGenerator : MonoBehaviour {
 
     public void GenerateLevel(int totalrockNumber, int resourceMin, int resourceMax)
     {
+        GameObject.Find("Weapon").GetComponent<RandomWeaponController>().GiveRandomWeapon();
+
         Removerocks();
-        
+
         //PUT DOWN ALL THE ROCKS
         for (int iRock = 0; iRock < totalrockNumber; iRock++)
         {
@@ -98,14 +91,11 @@ public class LevelGenerator : MonoBehaviour {
             rocks.Add(rock);
         }
 
+        //Remove all the enemies in the level
         foreach (GameObject enemySpawner in enemySpawners)
         {
             enemySpawner.GetComponent<EnemySpawner>().giveEnemySpeed += 0.5f;
-            enemySpawner.GetComponent<EnemySpawner>().spawnRate *= 0.8f;
-            if (totalrockNumber >= 18)
-            {
-                enemySpawner.GetComponent<EnemySpawner>().redEnemyActive = true;
-            }
+            enemySpawner.GetComponent<EnemySpawner>().timeTillWaveSpawn *= 0.8f;
             enemySpawner.GetComponent<EnemySpawner>().KillAllEnemys();
         }
 
@@ -115,7 +105,6 @@ public class LevelGenerator : MonoBehaviour {
 
     IEnumerator WaitForRockCollisionCheck()
     {
-        Debug.Log("ik ben even aan het wachten op kut steentjes");
         yield return new WaitForSeconds(2f);
     }
 

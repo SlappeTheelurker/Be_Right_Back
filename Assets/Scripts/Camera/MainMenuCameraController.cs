@@ -3,53 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MainMenuCameraController : MonoBehaviour {
-    Vector3 cityCamera;
-    //Vector3 original;
-    public Transform objCityCamera;
-    public float yPosition;
-    public float xPosition;
-    public float curYPos;
-    public float curXPos;
+    public Transform cameraTransform;
+    public float yPosition, xPosition, curYPos, curXPos, 
+        minY, maxY, minX, maxX, 
+        shake, shakeX;
 
-    public float minY;
-    public float maxY;
-    public float minX;
-    public float maxX;
-
-    float moveCamera;
-    public float shake;
-    public float shakeX;
+    private float moveCamera;
+    private Vector3 cameraVector;
 
     // Use this for initialization
     void Start()
     {
-        cityCamera = transform.position;
-        //original = transform.position;
+        cameraVector = transform.position;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        cityCamera = objCityCamera.position;
+        cameraVector = cameraTransform.position;
         moveCamera += Time.deltaTime;
-        cityCamera.y = yPosition * Mathf.Sin(moveCamera * shake * Mathf.PI);
-        cityCamera.x = xPosition * Mathf.Sin(moveCamera * shakeX * Mathf.PI);
-        objCityCamera.position = cityCamera;
+        cameraVector.y = yPosition * Mathf.Sin(moveCamera * shake * Mathf.PI);
+        cameraVector.x = xPosition * Mathf.Sin(moveCamera * shakeX * Mathf.PI);
+        cameraTransform.position = cameraVector;
 
-        curYPos = cityCamera.y;
+        curYPos = cameraVector.y;
         curYPos = (float)System.Math.Round(curYPos, 2);
 
-        curXPos = cityCamera.x;
+        curXPos = cameraVector.x;
         curXPos = (float)System.Math.Round(curXPos, 2);
 
         if (curYPos == 0f)
         {
-            yPosition = UnityEngine.Random.Range(minY, maxY);
+            yPosition = Random.Range(minY, maxY);
         }
 
         if (curXPos == 0f)
         {
-            xPosition = UnityEngine.Random.Range(minX, maxX);
+            xPosition = Random.Range(minX, maxX);
         }
     }
 }

@@ -38,6 +38,7 @@ public class SafeHouseController : MonoBehaviour {
         DontDestroyOnLoad(transform.gameObject);
     }
 
+    //Weapon upgrade button
     void FRUp()
     {
         if (player.GetComponent<PlayerController>().resourceAmount >= fireRateCost)
@@ -50,6 +51,7 @@ public class SafeHouseController : MonoBehaviour {
         }
     }
 
+    //HP upgrade button
     void HPUp()
     {
         if (player.GetComponent<PlayerController>().resourceAmount >= healthCost)
@@ -62,6 +64,7 @@ public class SafeHouseController : MonoBehaviour {
         }
     }
 
+    //Beat the game button
     void CraftCure()
     {
         if (player.GetComponent<PlayerController>().resourceAmount >= antidoteCost)
@@ -70,6 +73,7 @@ public class SafeHouseController : MonoBehaviour {
         }
     }
 
+    //Go to the next level button
     void TravelDimensions()
     {
         GameObject newFlash = Instantiate(flash, new Vector3(0f, 0f, 0f), Quaternion.identity);
@@ -86,6 +90,7 @@ public class SafeHouseController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Open craft menu
         if (collision.CompareTag("Player"))
         {
             craftMenu.SetActive(true);
@@ -97,6 +102,7 @@ public class SafeHouseController : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //close craft menu
         if (collision.CompareTag("Player"))
         {
             craftMenu.SetActive(false);

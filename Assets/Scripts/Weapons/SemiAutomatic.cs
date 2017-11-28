@@ -7,8 +7,7 @@ public abstract class SemiAutomatic : Weapon
     {
 
     }
-
-    //Input
+    
     protected void Update()
     {
         if (Input.GetMouseButtonDown(0))

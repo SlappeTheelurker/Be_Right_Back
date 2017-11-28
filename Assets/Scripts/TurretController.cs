@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour {
     public Bullet bullet;
-    public float bulletSpeed;
-    public float firingRate;
-
+    public float bulletSpeed, firingRate;
     public Transform firePoint;
-
-    private Ray2D ray;
-    private RaycastHit2D rayHit;
-
-    private AudioSource source;
     public AudioClip shot;
+
 
     private bool firing;
     private float fireCounter;
+    private Ray2D ray;
+    private RaycastHit2D rayHit;
+    private AudioSource source;
 
 	void Start () {
         ray = new Ray2D();
@@ -34,8 +31,7 @@ public class TurretController : MonoBehaviour {
 
                 Bullet newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as Bullet;
                 newBullet.speed = bulletSpeed;
-
-                //Firing sound
+                
                 source.PlayOneShot(shot);
             }
             firing = false;

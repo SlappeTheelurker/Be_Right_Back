@@ -17,17 +17,14 @@ public class TurretPlateScript : MonoBehaviour {
 	void Start () {
         thisSpriteRenderer = GetComponent<SpriteRenderer>();
         neutralPlate = thisSpriteRenderer.sprite;
-        turrets = new List<GameObject>();
-        turrets.Add(turret0);
-        turrets.Add(turret1);
-        turrets.Add(turret2);
-        turrets.Add(turret3);
+        turrets = new List<GameObject>
+        {
+            turret0,
+            turret1,
+            turret2,
+            turret3
+        };
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

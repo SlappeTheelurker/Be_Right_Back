@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpaceRockController : MonoBehaviour {
-    public int minResourceAmount, maxResourceAmount;
+    public int minResourceAmount, maxResourceAmount, health;
     public bool raided, collideWithRock, collideWithPlate, wellPlaced;
-    public int health;
     public Sprite damage1, damage2;
-    private AudioSource source;
     public AudioClip hit, explode;
 
-
+    private AudioSource source;
     private int resourceAmount;
     private SpriteRenderer spriteRenderer;
     private bool exploding;
@@ -27,6 +25,7 @@ public class SpaceRockController : MonoBehaviour {
     }
     
     void FixedUpdate() {
+        //checks if colliding with illegal collider for level generation
         if (collideWithRock || collideWithPlate)
         {
             GameObject.Find("LevelGenerator").GetComponent<LevelGenerator>().generating = true;
@@ -62,11 +61,11 @@ public class SpaceRockController : MonoBehaviour {
 
         if (health <= 0)
         {
-            deadCounter++;
+            deadCounter += Time.deltaTime;
             GetComponent<PolygonCollider2D>().enabled = false;
         }
 
-        if (deadCounter > 120)
+        if (deadCounter >= 2)
         {
             Destroy(gameObject);
         }

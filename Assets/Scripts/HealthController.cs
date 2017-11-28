@@ -6,18 +6,13 @@ using UnityEngine.UI;
 public class HealthController : MonoBehaviour {
     public GameObject healthBar;
     public int startingHealth, currentHealth;
-    public bool hit;
-    public int invulnerabilityLength;
-    public float invulnerabilityAlpha;
-    public bool isDead;
-
+    public bool hit, isDead;
+    public float invulnerabilityAlpha, invulnerabilityLength;
     public Color hitColor;
-    private Color defaultColor;
-
     public AudioClip hitSound;
-
     public GameObject dieText;
 
+    private Color defaultColor;
     private bool invulnerability;
     private float invulnerabilityCounter;
     private int gottenDamage;
@@ -32,11 +27,6 @@ public class HealthController : MonoBehaviour {
         defaultColor = GetComponent<Renderer>().material.color;
     }
 	
-	// Update is called once per frame
-	void Update ()
-    {
-    }
-
     private void FixedUpdate()
     {
         if (currentHealth <= 0)
@@ -51,8 +41,10 @@ public class HealthController : MonoBehaviour {
         {
             invulnerability = true;
             invulnerabilityCounter = invulnerabilityLength;
+
             GetComponent<PlayerController>().pPAnimator.SetBool("Hit", true);
             GetComponent<PlayerController>().source.PlayOneShot(hitSound);
+
             currentHealth -= gottenDamage;
             healthBar.GetComponent<HeartController>().ChangeHeartAmount(-gottenDamage);
             gottenDamage = 0;
@@ -71,7 +63,6 @@ public class HealthController : MonoBehaviour {
                 gottenDamage = 0;
             }
         }
-
         invulnerabilityCounter -= Time.deltaTime;
     }
 
@@ -80,7 +71,7 @@ public class HealthController : MonoBehaviour {
         hit = true;
         gottenDamage = damage;
         StartCoroutine(HitFlasher());
-        GetComponent<PlayerController>().GetKnockedTheFuckBack(knockback);
+        GetComponent<PlayerController>().GetKnockedBack(knockback);
     }
 
     public IEnumerator HitFlasher()

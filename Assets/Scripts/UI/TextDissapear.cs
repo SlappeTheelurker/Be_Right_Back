@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class TextDissapear : MonoBehaviour {
     public float travelSpeed, dissapearSpeed, textCounter;
 
-    private float opacity = 1.5f;
-    private float travelDistance;
+    private float opacity, travelDistance;
 
     // Use this for initialization
     void Start ()
     {
+        opacity = 1.5f;
         travelDistance = GetComponent<RectTransform>().transform.localPosition.y;
     }
 	

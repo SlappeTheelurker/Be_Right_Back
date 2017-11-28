@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
         Physics.IgnoreLayerCollision(gameObject.layer, gameObject.layer);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         currentDistance = Vector2.Distance(transform.position, target.GetComponent<Rigidbody2D>().transform.position);
 

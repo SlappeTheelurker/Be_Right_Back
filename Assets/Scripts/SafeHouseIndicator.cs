@@ -5,16 +5,8 @@ using UnityEngine.UI;
 
 public class SafeHouseIndicator : MonoBehaviour {
     public Image SafeHouseIndicatorImage;
-    public float edgeDistanceMultiplier;
-    public float yOffset;
-    public float xOffset;
-    public bool raided;
-
-    // Use this for initialization
-    void Start () {
-        raided = true;
-	}
-	
+    public float edgeDistanceMultiplier, yOffset, xOffset;
+    
 	// Update is called once per frame
 	void FixedUpdate () {
         Vector3 screenpos = Camera.main.WorldToScreenPoint(transform.position);
@@ -29,9 +21,6 @@ public class SafeHouseIndicator : MonoBehaviour {
         else //if offscreen
         {
             Vector3 screenCenter = new Vector3(Screen.width, Screen.height, 0) / 2;
-
-            //calculate form the middle of the screen, instead of the underleft corner
-            //screenpos -= screenCenter;
 
             //find angle from center of screen 
             float angle = Mathf.Atan2(screenpos.y+yOffset, screenpos.x+xOffset);
@@ -64,10 +53,7 @@ public class SafeHouseIndicator : MonoBehaviour {
             {
                 screenpos = new Vector3(-screenBounds.x, -screenBounds.x * m, 0);
             }
-
-            //stop with calculating from the middle of the screen
-            //screenpos += screenCenter;
-
+            
             SafeHouseIndicatorImage.transform.localPosition = screenpos;
             SafeHouseIndicatorImage.transform.localRotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
         }

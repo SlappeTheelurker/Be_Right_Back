@@ -5,20 +5,10 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public GameObject objectFollowing;
-    public float followSpeed;
+    public float followSpeed, shakeDuration, shakeAmount, decreaseFactor;
 
-    // Transform of the camera to shake. Grabs the gameObject's transform
-    // if null.
+    private Vector3 originalPos;
     private Transform camTransform;
-
-    // How long the object should shake for.
-    public float shakeDuration = 0f;
-
-    // Amplitude of the shake. A larger value shakes the camera harder.
-    public float shakeAmount = 0.7f;
-    public float decreaseFactor = 1.0f;
-
-    Vector3 originalPos;
 
     private void Start()
     {
@@ -26,27 +16,7 @@ public class CameraController : MonoBehaviour {
         camTransform = GetComponent<Transform>();
     }
 
-    void OnEnable()
-    {
-        //originalPos = camTransform.localPosition;
-    }
-
-    private void Update()
-    {
-        //if (shakeDuration > 0)
-        //{
-        //    camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
-
-        //    shakeDuration -= Time.deltaTime * decreaseFactor;
-        //}
-        //else
-        //{
-        //    shakeDuration = 0f;
-        //    camTransform.localPosition = originalPos;
-        //}
-    }
-
-    void LateUpdate()
+    private void LateUpdate()
     {
         float newX = objectFollowing.transform.position.x;
         float newY = objectFollowing.transform.position.y;

@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class HeartController : MonoBehaviour {
 
-    public int startHearts, maxHeartAmount, healthPerHeart;
-    public int curHealth;
-    private int maxHealth;
-
+    public int startHearts, maxHeartAmount, healthPerHeart, curHealth;
     public Image[] healthImages;
     public Sprite[] healthSprites;
+
+    private int maxHealth;
 
     // Use this for initialization
     void Start () {
@@ -18,14 +17,6 @@ public class HeartController : MonoBehaviour {
         CheckHealthAmount();
         UpdateHearts();
 	}
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.H))
-        {
-            UpdateHearts();
-        }
-    }
 
     void CheckHealthAmount()
     {
@@ -75,7 +66,7 @@ public class HeartController : MonoBehaviour {
     {
         curHealth += amount;
 
-        if ((float)curHealth / (float)healthPerHeart > (float)startHearts)
+        if ((float)curHealth / healthPerHeart > startHearts)
         {
             AddHeartcontainer();
         }
