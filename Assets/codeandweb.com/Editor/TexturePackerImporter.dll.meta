@@ -1,28 +1,3 @@
-fileFormatVersion: 2
-guid: 98b6c1804f4a04425b029daa48d60214
-labels:
-- Texture
-- Packer
-- TexturePacker
-timeCreated: 1449136926
-licenseType: Store
-PluginImporter:
-  serializedVersion: 1
-  iconMap: {}
-  executionOrder: {}
-  isPreloaded: 0
-  platformData:
-    Any:
-      enabled: 0
-      settings: {}
-    Editor:
-      enabled: 1
-      settings:
-        DefaultValueInitialized: true
-    WindowsStoreApps:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+version https://git-lfs.github.com/spec/v1
+oid sha256:69d4831c291a093d9ab283df94e7fb84387d6f9045187e12746d9f1e6a9e4e2f
+size 512
