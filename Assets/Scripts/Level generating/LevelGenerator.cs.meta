@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0f1dc71b21b1c9947a65a727e84ba46f
+timeCreated: 1508005511
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - raidHousePrefab: {fileID: 1204379732206584, guid: e833fe3a52f128d48986c5ee7243662e,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,27 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Resources/Sprites/DimensionRockAtlas.tpsheet
+- Assets/Resources/Sprites/HeartAtlas.tpsheet
+- Assets/Resources/Sprites/Pistol/PistolAtlas.tpsheet
+- Assets/Resources/Sprites/PlayerAtlas.tpsheet
+- Assets/Resources/Sprites/PlayerPortrait.tpsheet
+- Assets/Resources/Sprites/SlimeAtlas.tpsheet
+textureFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Resources/Sprites/DimensionRockAtlas.png
+- Assets/Resources/Sprites/HeartAtlas.png
+- Assets/Resources/Sprites/Pistol/PistolAtlas.png
+- Assets/Resources/Sprites/PlayerAtlas.png
+- Assets/Resources/Sprites/PlayerPortrait.png
+- Assets/Resources/Sprites/SlimeAtlas.png
+normalmapFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+- 
+- 
+- 
+enableDebugOutput: 0
